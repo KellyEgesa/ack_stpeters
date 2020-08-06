@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect, HashRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import jwtDecode from "jwt-decode";
 import "react-toastify/dist/ReactToastify.css";
@@ -31,60 +31,62 @@ class App extends Component {
   render() {
     const { user } = this.state;
     return (
-      <React.Fragment>
-        <ToastContainer />
-        <main className="container">
-          <div>
-            <Header user={user} />
-            <div className="content">
-              <Switch>
-                <Route path="/confirmed/:id" component={Confirmed} />
-                <Route
-                  path="/worshipperTable/:id"
-                  render={(props) => {
-                    if (!localStorage.getItem("token")) {
-                      return <Redirect to="LogIn" />;
-                    }
-                    return <WorshipperTable {...props} />;
-                  }}
-                />
-                <Route
-                  path="/deleteserv"
-                  render={(props) => {
-                    if (!localStorage.getItem("token")) {
-                      return <Redirect to="LogIn" />;
-                    }
-                    return <DeleteService {...props} />;
-                  }}
-                />
-                <Route
-                  path="/service"
-                  render={(props) => {
-                    if (!localStorage.getItem("token")) {
-                      return <Redirect to="LogIn" />;
-                    }
-                    return <ServiceForm {...props} />;
-                  }}
-                />
-                <Route
-                  path="/Dashboard"
-                  render={(props) => {
-                    if (!localStorage.getItem("token")) {
-                      alert(user);
-                      return <Redirect to="LogIn" />;
-                    }
-                    return <Dashboard {...props} />;
-                  }}
-                />
-                <Route path="/LogIn" component={LoginForm} />
-                <Route path="/logout" component={Logout} />
-                <Route path="/Booked" component={Booked} />
-                <Route path="/" component={MainPage} />
-              </Switch>
+      <HashRouter basename="/">
+        <React.Fragment>
+          <ToastContainer />
+          <main className="container">
+            <div>
+              <Header user={user} />
+              <div className="content">
+                <Switch>
+                  <Route path="/confirmed/:id" component={Confirmed} />
+                  <Route
+                    path="/worshipperTable/:id"
+                    render={(props) => {
+                      if (!localStorage.getItem("token")) {
+                        return <Redirect to="LogIn" />;
+                      }
+                      return <WorshipperTable {...props} />;
+                    }}
+                  />
+                  <Route
+                    path="/deleteserv"
+                    render={(props) => {
+                      if (!localStorage.getItem("token")) {
+                        return <Redirect to="LogIn" />;
+                      }
+                      return <DeleteService {...props} />;
+                    }}
+                  />
+                  <Route
+                    path="/service"
+                    render={(props) => {
+                      if (!localStorage.getItem("token")) {
+                        return <Redirect to="LogIn" />;
+                      }
+                      return <ServiceForm {...props} />;
+                    }}
+                  />
+                  <Route
+                    path="/Dashboard"
+                    render={(props) => {
+                      if (!localStorage.getItem("token")) {
+                        alert(user);
+                        return <Redirect to="LogIn" />;
+                      }
+                      return <Dashboard {...props} />;
+                    }}
+                  />
+                  <Route path="/LogIn" component={LoginForm} />
+                  <Route path="/logout" component={Logout} />
+                  <Route path="/Booked" component={Booked} />
+                  <Route path="/" component={MainPage} />
+                </Switch>
+              </div>
             </div>
-          </div>
-        </main>
-      </React.Fragment>
+          </main>
+        </React.Fragment>
+      </HashRouter>
     );
   }
 }

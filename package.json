@@ -2,7 +2,7 @@
   "name": "ack_stpeters",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://KellyEgesa.github.io/",
+  "homepage": "https://KellyEgesa.github.io/ack_stpeters/",
   "dependencies": {
     "@sentry/react": "^5.20.1",
     "@testing-library/jest-dom": "^4.2.4",
